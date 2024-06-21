@@ -1,0 +1,62 @@
+[
+	{
+		"context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
+		"bindings": {
+			"alt-h": ["workspace::ActivatePaneInDirection", "Left"],
+			"alt-l": ["workspace::ActivatePaneInDirection", "Right"],
+			"alt-k": ["workspace::ActivatePaneInDirection", "Up"],
+			"alt-j": ["workspace::ActivatePaneInDirection", "Down"],
+			"alt-q": "pane::CloseActiveItem",
+			"alt-shift-q": "pane::CloseAllItems",
+			"space s v": "pane::SplitRight",
+			"space s s": "pane::SplitDown",
+			"tab": "pane::ActivateNextItem",
+			"shift-tab": "pane::ActivatePrevItem",
+			"space a d": "workspace::ToggleLeftDock",
+			"space a f": "workspace::ToggleRightDock",
+			"space a s": "workspace::ToggleBottomDock",
+			"space l k": "editor::Hover",
+			"space l d": "editor::GoToDefinition",
+			"space l shift-d": "editor::GoToDefinitionSplit",
+			"space l h": "editor::GoToDiagnostic",
+			"space l l": "editor::GoToPrevDiagnostic",
+			"alt-space": "command_palette::Toggle",
+			"alt-f": "workspace::ToggleZoom"
+		}
+	},
+	{
+		"context": "ProjectPanel && not_editing || Terminal || OutlinePanel",
+		"bindings": {
+			"alt-h": ["workspace::ActivatePaneInDirection", "Left"],
+			"alt-l": ["workspace::ActivatePaneInDirection", "Right"],
+			"alt-k": ["workspace::ActivatePaneInDirection", "Up"],
+			"alt-j": ["workspace::ActivatePaneInDirection", "Down"],
+			"alt-space": "command_palette::Toggle"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"alt-f": "workspace::ToggleZoom",
+			"alt-enter": "workspace::NewTerminal",
+			"alt-1": ["pane::ActivateItem", 0],
+			"alt-2": ["pane::ActivateItem", 1],
+			"alt-3": ["pane::ActivateItem", 2],
+			"alt-4": ["pane::ActivateItem", 3],
+			"alt-5": ["pane::ActivateItem", 4],
+			"alt-6": ["pane::ActivateItem", 5],
+			"alt-7": ["pane::ActivateItem", 6],
+			"alt-8": ["pane::ActivateItem", 7],
+			"alt-9": ["pane::ActivateItem", 8]
+		}
+	},
+	{
+		"context": "OutlinePanel",
+		"bindings": {
+			"j": "menu::SelectNext",
+			"k": "menu::SelectPrev",
+			// This isn't quite it...
+			"enter": ["outline_panel::ToggleFocus", "outline_panel::Open"]
+		}
+	}
+]
