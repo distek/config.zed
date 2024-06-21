@@ -8,15 +8,25 @@
 // from the command palette or from `Zed` application menu.
 {
 	"outline_panel": {
-  "dock": "right"
- },
- "features": {
+		"dock": "right"
+	},
+	"features": {
 		"inline_completion_provider": "none"
 	},
 	"theme": "Ayu Dark",
 	"telemetry": {
 		"diagnostics": false,
 		"metrics": false
+	},
+	"buffer_font_family": "FiraCode Nerd Font Mono",
+	"buffer_font_features": {
+		// Disable ligatures:
+		"calt": false
+	},
+	"ui_font_family": "FiraCode Nerd Font Mono",
+	"ui_font_features": {
+		// Disable ligatures:
+		"calt": false
 	},
 	"vim_mode": true,
 	"ui_font_size": 13,
