@@ -7,13 +7,30 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-	"outline_panel": {
+	"icon_theme": "VSCode Icons (Dark)",
+ "outline_panel": {
+		"dock": "right",
+		"file_icons": true,
+		"folder_icons": true
+	},
+	"git_panel": {
 		"dock": "right"
 	},
-	"features": {
-		"inline_completion_provider": "none"
+	"project_panel": {
+		"indent_size": 30,
+		"hide_gitignore": true,
+		"scrollbar": {
+			"show": "always"
+		},
+		"default_width": 300
 	},
-	"theme": "Ayu Dark",
+	"search": {
+		"regex": true
+	},
+	"features": {
+		"edit_prediction_provider": "none"
+	},
+	"theme": "Kanagawa Dragon",
 	"telemetry": {
 		"diagnostics": false,
 		"metrics": false
@@ -28,6 +45,9 @@
 		// Disable ligatures:
 		"calt": false
 	},
+	"terminal": {
+		"option_as_meta": true
+	},
 	"vim_mode": true,
 	"ui_font_size": 13,
 	"buffer_font_size": 13,
@@ -36,12 +56,38 @@
 		"button": false
 	},
 	"chat_panel": {
-		"button": false
+		"button": "never"
 	},
-	"assistant": {
-		"button": false
+	"agent": {
+		"default_model": {
+			"provider": "ollama",
+			"model": "deepseek-r1:14b"
+		},
+		"version": "2",
+		"button": true
 	},
 	"notification_panel": {
 		"button": false
+	},
+	"language_models": {
+		"ollama": {
+			"api_url": "http://192.168.1.146:11434",
+			"available_models": [
+				{
+					"name": "qwen2.5-coder",
+					"display_name": "qwen 2.5 coder 32K",
+					"max_tokens": 32768,
+					"supports_tools": true
+				},
+				{
+					"name": "devstral",
+					"display_name": "devstral",
+					"max_tokens": 32768,
+					"max_output_tokens": 4096,
+					"max_completion_tokens": 1024,
+					"supports_tools": true
+				}
+			]
+		}
 	}
 }

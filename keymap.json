@@ -1,36 +1,77 @@
 [
 	{
+		"context": "Editor && menu && showing_code_actions",
+		"bindings": {
+			"j": "menu::SelectNext",
+			"k": "menu::SelectPrevious",
+			"enter": "editor::ConfirmCodeAction"
+		}
+	},
+	{
+		"bindings": {
+			"alt-h": "workspace::ActivatePaneLeft",
+			"alt-l": "workspace::ActivatePaneRight",
+			"alt-k": "workspace::ActivatePaneUp",
+			"alt-j": "workspace::ActivatePaneDown"
+		}
+	},
+	{
+		"context": "Editor && vim_mode == visual && vim_operator == none && !VimWaiting",
+		"bindings": {
+			"cmd-alt-shift-c 0 1": "editor::ToggleComments",
+			"space c m": ["workspace::SendKeystrokes", "cmd-alt-shift-c 0 1 escape"]
+		}
+	},
+	{
 		"context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
 		"bindings": {
-			"alt-h": ["workspace::ActivatePaneInDirection", "Left"],
-			"alt-l": ["workspace::ActivatePaneInDirection", "Right"],
-			"alt-k": ["workspace::ActivatePaneInDirection", "Up"],
-			"alt-j": ["workspace::ActivatePaneInDirection", "Down"],
+			// ridiculous binds to use for "SendKeystrokes" commands
+			"cmd-alt-shift-ctrl-c 0 1": "editor::ToggleComments",
+			"cmd-alt-shift-ctrl-c 0 2": "workspace::ToggleRightDock",
+			"cmd-alt-shift-ctrl-c 0 3": "outline_panel::ToggleFocus",
+			"cmd-alt-shift-ctrl-c 0 4": "project_panel::ToggleFocus",
+
+			// "alt-h": "workspace::ActivatePaneLeft",
+			// "alt-l": "workspace::ActivatePaneRight",
+			// "alt-k": "workspace::ActivatePaneUp",
+			// "alt-j": "workspace::ActivatePaneDown",
 			"alt-q": "pane::CloseActiveItem",
 			"alt-shift-q": "pane::CloseAllItems",
 			"space s v": "pane::SplitRight",
 			"space s s": "pane::SplitDown",
 			"tab": "pane::ActivateNextItem",
-			"shift-tab": "pane::ActivatePrevItem",
+			"shift-tab": "pane::ActivatePreviousItem",
 			"space a d": "workspace::ToggleLeftDock",
-			"space a f": "workspace::ToggleRightDock",
+			"space a f": ["workspace::SendKeystrokes", "cmd-alt-shift-ctrl-c 0 2"],
 			"space a s": "workspace::ToggleBottomDock",
-			"space l k": "editor::Hover",
-			"space l d": "editor::GoToDefinition",
-			"space l shift-d": "editor::GoToDefinitionSplit",
+			"space c m": ["workspace::SendKeystrokes", "cmd-alt-shift-c 0 1 escape"],
+			"space g g": [
+				"workspace::SendKeystrokes",
+				": git panel: toggle focus enter : workspace toggle right dock enter"
+			],
+			"space k r": ["workspace::SendKeystrokes", "cmd-alt-shift-ctrl-c 0 4 /"],
+			"space l a": "editor::ToggleCodeActions",
+			"space l d": "editor::Hover",
+			"space l D": "editor::GoToDefinition",
+			"space l s D": "editor::GoToDefinitionSplit",
 			"space l h": "editor::GoToDiagnostic",
-			"space l l": "editor::GoToPrevDiagnostic",
+			"space l l": "editor::GoToPreviousDiagnostic",
+			"space l o": "editor::ToggleInlineDiagnostics",
 			"alt-space": "command_palette::Toggle",
-			"alt-f": "workspace::ToggleZoom"
+			"alt-f": "workspace::ToggleZoom",
+			"alt-[": "pane::ActivatePreviousItem",
+			"alt-]": "pane::ActivateNextItem",
+			"ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+			"ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"]
 		}
 	},
 	{
-		"context": "ProjectPanel && not_editing || Terminal || OutlinePanel",
+		"context": "ProjectPanel && not_editing || Terminal || OutlinePanel || GitPanel",
 		"bindings": {
-			"alt-h": ["workspace::ActivatePaneInDirection", "Left"],
-			"alt-l": ["workspace::ActivatePaneInDirection", "Right"],
-			"alt-k": ["workspace::ActivatePaneInDirection", "Up"],
-			"alt-j": ["workspace::ActivatePaneInDirection", "Down"],
+			// "alt-h": "workspace::ActivatePaneLeft",
+			// "alt-l": "workspace::ActivatePaneRight",
+			// "alt-k": "workspace::ActivatePaneUp",
+			// "alt-j": "workspace::ActivatePaneDown",
 			"alt-space": "command_palette::Toggle"
 		}
 	},
@@ -47,16 +88,50 @@
 			"alt-6": ["pane::ActivateItem", 5],
 			"alt-7": ["pane::ActivateItem", 6],
 			"alt-8": ["pane::ActivateItem", 7],
-			"alt-9": ["pane::ActivateItem", 8]
+			"alt-9": ["pane::ActivateItem", 8],
+			"alt-[": "pane::ActivatePreviousItem",
+			"alt-]": "pane::ActivateNextItem",
+			"\\ a s": "workspace::ToggleBottomDock",
+			"alt-a [": "terminal::ToggleViMode"
 		}
 	},
 	{
 		"context": "OutlinePanel",
 		"bindings": {
+			// "cmd-alt-shift-ctrl-c 0 2": "workspace::ToggleRightDock",
+
 			"j": "menu::SelectNext",
-			"k": "menu::SelectPrev",
+			"k": "menu::SelectPrevious",
 			// This isn't quite it...
-			"enter": ["outline_panel::ToggleFocus", "outline_panel::Open"]
+			"enter": "outline_panel::OpenSelectedEntry"
+		}
+	},
+	{
+		"context": "OutlinePanel || GitPanel || AgentPanel",
+		"bindings": {
+			"alt-]": "panel::NextPanelTab",
+			"alt-[": "panel::PreviousPanelTab",
+			"space a f": "workspace::ToggleRightDock"
+		}
+	},
+	{
+		"context": "ProjectPanel",
+		"bindings": {
+			"a": "project_panel::NewFile",
+			"d": "project_panel::Trash",
+			"x": "project_panel::Cut",
+			"c": "project_panel::Copy",
+			"p": "project_panel::Paste",
+			"H": "project_panel::ToggleHideGitIgnore"
+		}
+	},
+	{
+		"context": "ProjectSearchBar",
+		"bindings": {
+			"escape escape": "pane::CloseActiveItem",
+			"alt-[": "pane::ActivatePreviousItem",
+			"alt-]": "pane::ActivateNextItem",
+			"alt-q": "pane::CloseActiveItem"
 		}
 	}
 ]
